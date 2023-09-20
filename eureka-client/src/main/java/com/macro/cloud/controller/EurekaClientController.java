@@ -17,6 +17,9 @@ public class EurekaClientController {
     @Value("${server.port}")
     private String servicePort;
 
+    /**
+     * http://localhost:8101/client/info
+     */
     @GetMapping("/info")
     public Object info() {
         return "Info from service:" + serviceId + " port:" + servicePort+"!";

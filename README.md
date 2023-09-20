@@ -16,11 +16,11 @@
 
 ### 概述
 
-- [Spring Cloud 整体架构概览](https://www.macrozheng.com/cloud/springcloud.html)
+- [Spring Cloud 整体架构概览](https://juejin.cn/post/6844903938748219406)
 
 ### Spring Cloud 组件
 
-- [Spring Cloud Eureka：服务注册与发现](https://www.macrozheng.com/cloud/eureka.html)
+- [Spring Cloud Eureka：服务注册与发现](https://juejin.cn/post/6844903940312530957)
 - [Spring Cloud Ribbon：负载均衡的服务调用](https://www.macrozheng.com/cloud/ribbon.html)
 - [Spring Cloud Hystrix：服务容错保护](https://www.macrozheng.com/cloud/hystrix.html)
 - [Hystrix Dashboard：断路器执行监控](https://www.macrozheng.com/cloud/hystrix_dashboard.html)
