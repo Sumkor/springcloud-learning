@@ -16,9 +16,17 @@ import org.springframework.web.client.RestTemplate;
 public class UserRibbonController {
     @Autowired
     private RestTemplate restTemplate;
+
+    /**
+     * http://user-service
+     * 根据服务名称去注册中心获取实际的服务信息，最终再转换为要请求的地址。
+     */
     @Value("${service-url.user-service}")
     private String userServiceUrl;
 
+    /**
+     * http://localhost:8301/user/1
+     */
     @GetMapping("/{id}")
     public CommonResult getUser(@PathVariable Long id) {
         return restTemplate.getForObject(userServiceUrl + "/user/{1}", CommonResult.class, id);

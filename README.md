@@ -1,13 +1,5 @@
 # springcloud-learning
 
-<p>
-    <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%85%AC%E4%BC%97%E5%8F%B7-macrozheng-blue.svg" alt="公众号"></a>
-    <a href="#公众号"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E4%BA%A4%E6%B5%81-%E5%BE%AE%E4%BF%A1%E7%BE%A4-2BA245.svg" alt="交流"></a>
-    <a href="https://github.com/macrozheng/mall-swarm"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/Cloud%E7%89%88%E6%9C%AC-mall--swarm-brightgreen.svg" alt="SpringCloud版本"></a>
-    <a href="https://github.com/macrozheng/mall"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%90%8E%E5%8F%B0%E9%A1%B9%E7%9B%AE-mall-blue.svg" alt="后台项目"></a>
-    <a href="https://github.com/macrozheng/mall-admin-web"><img src="http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/badge/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE-mall--admin--web-green.svg" alt="前端项目"></a>
-</p>
-
 ## 简介
 
 一套涵盖大部分核心组件使用的Spring Cloud教程，包括Spring Cloud Alibaba及分布式事务Seata，基于Spring Cloud Greenwich及SpringBoot 2.1.7。24篇文章，篇篇精华，34个Demo，涵盖大部分应用场景。
@@ -21,7 +13,23 @@
 ### Spring Cloud 组件
 
 - [Spring Cloud Eureka：服务注册与发现](https://juejin.cn/post/6844903940312530957)
-- [Spring Cloud Ribbon：负载均衡的服务调用](https://www.macrozheng.com/cloud/ribbon.html)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── eureka-security-server -- 带登录认证的eureka注册中心
+└── eureka-client -- eureka客户端
+```
+
+- [Spring Cloud Ribbon：负载均衡的服务调用](https://juejin.cn/post/6844903943084965902)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── user-service -- 提供User对象CRUD接口的服务
+└── ribbon-service -- ribbon服务调用测试服务
+```
+
 - [Spring Cloud Hystrix：服务容错保护](https://www.macrozheng.com/cloud/hystrix.html)
 - [Hystrix Dashboard：断路器执行监控](https://www.macrozheng.com/cloud/hystrix_dashboard.html)
 - [Spring Cloud OpenFeign：基于Ribbon和Hystrix的声明式服务调用](https://www.macrozheng.com/cloud/feign.html)
@@ -94,11 +102,3 @@ springcloud-learning
 ├── micro-oauth2 -- Gateway + Oauth2 实现统一认证和鉴权
 └── micro-knife4j -- Gateway + Knife4j聚合API文档
 ```
-
-## 公众号
-
-学习不走弯路，关注公众号「**macrozheng**」，回复「**学习路线**」，获取mall项目专属学习路线！
-
-加微信群交流，公众号后台回复「**加群**」即可。
-
-![公众号图片](http://macro-oss.oss-cn-shenzhen.aliyuncs.com/mall/banner/qrcode_for_macrozheng_258.jpg)
