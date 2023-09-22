@@ -30,7 +30,15 @@ springcloud-learning
 └── ribbon-service -- ribbon服务调用测试服务
 ```
 
-- [Spring Cloud Hystrix：服务容错保护](https://www.macrozheng.com/cloud/hystrix.html)
+- [Spring Cloud Hystrix：服务容错保护](https://juejin.cn/post/6844903945026928654)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── user-service -- 提供User对象CRUD接口的服务
+└── hystrix-service -- hystrix服务调用测试服务
+```
+
 - [Hystrix Dashboard：断路器执行监控](https://www.macrozheng.com/cloud/hystrix_dashboard.html)
 - [Spring Cloud OpenFeign：基于Ribbon和Hystrix的声明式服务调用](https://www.macrozheng.com/cloud/feign.html)
 - [Spring Cloud Zuul：API网关服务](https://www.macrozheng.com/cloud/zuul.html)

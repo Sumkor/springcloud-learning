@@ -22,11 +22,17 @@ public class UserHystrixController {
     @Autowired
     private UserService userService;
 
+    /**
+     * http://localhost:8401/user/testFallback/1
+     */
     @GetMapping("/testFallback/{id}")
     public CommonResult testFallback(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
+    /**
+     * http://localhost:8401/user/testCommand/1
+     */
     @GetMapping("/testCommand/{id}")
     public CommonResult testCommand(@PathVariable Long id) {
         return userService.getUserCommand(id);
@@ -37,6 +43,9 @@ public class UserHystrixController {
         return userService.getUserException(id);
     }
 
+    /**
+     * http://localhost:8401/user/testCache/1
+     */
     @GetMapping("/testCache/{id}")
     public CommonResult testCache(@PathVariable Long id) {
         userService.getUserCache(id);
@@ -45,6 +54,9 @@ public class UserHystrixController {
         return new CommonResult("操作成功", 200);
     }
 
+    /**
+     * http://localhost:8401/user/testRemoveCache/1
+     */
     @GetMapping("/testRemoveCache/{id}")
     public CommonResult testRemoveCache(@PathVariable Long id) {
         userService.getUserCache(id);
@@ -53,10 +65,15 @@ public class UserHystrixController {
         return new CommonResult("操作成功", 200);
     }
 
+    /**
+     * http://localhost:8401/user/testCollapser
+     */
     @GetMapping("/testCollapser")
     public CommonResult testCollapser() throws ExecutionException, InterruptedException {
+        Future<User> future0 = userService.getUserFuture(1L);
         Future<User> future1 = userService.getUserFuture(1L);
         Future<User> future2 = userService.getUserFuture(2L);
+        future0.get();
         future1.get();
         future2.get();
         ThreadUtil.safeSleep(200);

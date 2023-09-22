@@ -13,6 +13,11 @@ import java.io.IOException;
 @Component
 @WebFilter(urlPatterns = "/*",asyncSupported = true)
 public class HystrixRequestContextFilter implements Filter {
+
+    /**
+     * 在每个请求前后初始化和关闭HystrixRequestContext，否则使用 @CacheResult 会出现如下异常：
+     * Request caching is not available. Maybe you need to initialize the HystrixRequestContext?
+     */
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HystrixRequestContext context = HystrixRequestContext.initializeContext();

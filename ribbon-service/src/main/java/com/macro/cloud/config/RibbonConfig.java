@@ -43,9 +43,6 @@ public class RibbonConfig {
          * 默认是采用 ZoneAwareLoadBalancer 作为负载均衡策略，复合判断服务所在区域的性能和服务的可用性进行轮询选择
          * @see RibbonLoadBalancerClient#getServer(com.netflix.loadbalancer.ILoadBalancer, java.lang.Object)
          * @see ZoneAwareLoadBalancer#chooseServer(java.lang.Object)
-         * @see BaseLoadBalancer#chooseServer(java.lang.Object)
-         * @see PredicateBasedRule#choose(java.lang.Object)
-         * @see AbstractServerPredicate#chooseRoundRobinAfterFiltering(java.util.List, java.lang.Object)
          */
     }
 
@@ -58,12 +55,34 @@ public class RibbonConfig {
     /**
      * 更改负载均衡策略
      *
-     * RoundRobinRule：轮询策略
-     * RandomRule：随机策略
-     * BestAvailableRule：最大可用策略，即先过滤出故障服务实例后，选择一个当前并发请求数最小的。
-     * WeightedResponseTimeRule：响应时间权重策略，对各个服务实例响应时间进行加权处理，然后再采用轮询的方式选择一个。
-     * AvailabilityFilteringRule：可用过滤策略，先过滤出有故障的或并发请求大于阈值的一部分服务实例，然后再采用轮询的方式选择一个。
-     * ZoneAvoidanceRule：区域感知策略，先使用主过滤条件（区域负载器，选择最优区域）对所有实例过滤并返回过滤后的实例，然后再采用轮询的方式选择一个。
+     * Ribbon中提供了多个内置的负载均衡算法，下面介绍每个算法的实现原理（by ChatGPT 3.5）：
+     *
+     * 1. RoundRobinRule（轮询算法）：
+     *    - 实现原理：采用简单的轮询方式，依次选择可用的服务实例进行请求转发。
+     *    - Ribbon会维护一个计数器，每次选择下一个服务实例时递增计数器的值，达到轮询的效果。
+     *
+     * 2. RandomRule（随机算法）：
+     *    - 实现原理：随机选择一个可用的服务实例进行请求转发。
+     *    - Ribbon使用Java的`java.util.Random`类生成一个随机数，根据随机数在可用的服务实例列表中进行选择。
+     *
+     * 3. BestAvailableRule（最佳可用算法）：
+     *    - 实现原理：选择具备最佳性能的服务实例进行请求转发。
+     *    - Ribbon会根据服务实例的健康状态和连接数等指标，选择具备最佳性能的实例，例如，选择连接数最少的实例。
+     *
+     * 4. WeightedResponseTimeRule（加权响应时间算法）：
+     *    - 实现原理：根据服务实例的平均响应时间和权重，进行加权选择。
+     *    - Ribbon会根据服务实例的平均响应时间进行加权计算，响应时间越长的实例权重越低，选择权重较高的实例进行请求转发。
+     *
+     * 5. AvailabilityFilteringRule（可用性过滤算法）：
+     *    - 实现原理：根据服务实例的可用性和可用区域进行过滤和选择。
+     *    - Ribbon会先过滤掉不可用的服务实例，再根据可用区域选择合适的实例进行请求转发。
+     *
+     * 6. ZoneAvoidanceRule（区域避免算法）：
+     *    - 实现原理：根据服务实例所在的区域进行避免跨区域调用。
+     *    - Ribbon会尽量选择在同一区域内的实例，避免跨区域调用，以降低延迟和故障风险。
+     *
+     * LoadBalancerClient 在执行请求的时候，会记录服务的连接数{@link ServerStats#incrementActiveRequestsCount()}、响应时间{@link ServerStats#getResponseTimeAvg()}等信息，用于下一次负载均衡
+     * @see RibbonLoadBalancerClient#execute(java.lang.String, org.springframework.cloud.client.ServiceInstance, org.springframework.cloud.client.loadbalancer.LoadBalancerRequest)
      */
     @Bean
     public IRule myRule(){
