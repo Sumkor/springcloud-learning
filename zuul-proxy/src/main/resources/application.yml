@@ -9,21 +9,37 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8001/eureka/
+
 zuul:
-  routes: #给服务配置路由
+  # 与 eureka 结合使用，给服务配置路由
+  # 访问 http://localhost:8801/userService/user/1  请求路由到 user-service
+  # 访问 http://localhost:8801/feignService/user/1 请求路由到 feign-service
+  routes:
     user-service:
       path: /userService/**
     feign-service:
       path: /feignService/**
-#  ignored-services: user-service,feign-service #关闭默认路由配置
 #  prefix: /proxy #给网关路由添加前缀
-  sensitive-headers: Cookie,Set-Cookie,Authorization #配置过滤敏感的请求头信息，设置为空就不会过滤
-  add-host-header: true #设置为true重定向是会添加host请求头
+  sensitive-headers: Cookie,Set-Cookie,Authorization #防止路由时的 Cookie 及 Authorization 丢失
+  add-host-header: true #设置为 true，则重定向时会添加原始的 host 请求头
   PreLogFilter:
     pre:
-      disable: true #控制是否启用过滤器
+      disable: false #控制是否启用过滤器
+
+# 通过 SpringBoot Actuator 来查看 Zuul 中的路由信息
+# 通过访问 http://localhost:8801/actuator/routes 查看简单路由信息
+# 通过访问 http://localhost:8801/actuator/routes/details 查看详细路由信息
 management:
   endpoints:
     web:
       exposure:
         include: 'routes'
+
+# 使用 Hystrix 的配置来设置路由转发时 HystrixCommand 的执行超时时间：
+hystrix:
+  command: #控制 HystrixCommand 的行为
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000 #配置超时时间，执行超过该时间会进行服务降级处理

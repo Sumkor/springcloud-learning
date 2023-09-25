@@ -61,7 +61,16 @@ springcloud-learning
 └── feign-service -- feign服务调用测试服务
 ```
 
-- [Spring Cloud Zuul：API网关服务](https://www.macrozheng.com/cloud/zuul.html)
+- [Spring Cloud Zuul：API网关服务](https://juejin.cn/post/6844903960696848397)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── user-service -- 提供User对象CRUD接口的服务
+├── feign-service -- feign服务调用测试服务
+└── zuul-proxy -- zuul作为网关的测试服务
+```
+
 - [Spring Cloud Config：外部集中化配置管理](https://www.macrozheng.com/cloud/config.html)
 - [Spring Cloud Bus：消息总线](https://www.macrozheng.com/cloud/bus.html)
 - [Spring Cloud Sleuth：分布式请求链路跟踪](https://www.macrozheng.com/cloud/sleuth.html)
