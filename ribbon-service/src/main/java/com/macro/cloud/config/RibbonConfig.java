@@ -53,7 +53,7 @@ public class RibbonConfig {
     }
 
     /**
-     * 更改负载均衡策略
+     * 更改负载均衡策略（使用 RestTemplate 的时候，在 yml 中配置是无效的，需要在此配置）
      *
      * Ribbon中提供了多个内置的负载均衡算法，下面介绍每个算法的实现原理（by ChatGPT 3.5）：
      *

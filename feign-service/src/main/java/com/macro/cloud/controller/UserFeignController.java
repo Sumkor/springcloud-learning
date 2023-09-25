@@ -15,6 +15,9 @@ public class UserFeignController {
     @Autowired
     private UserService userService;
 
+    /**
+     * http://localhost:8701/user/1
+     */
     @GetMapping("/{id}")
     public CommonResult getUser(@PathVariable Long id) {
         return userService.getUser(id);
