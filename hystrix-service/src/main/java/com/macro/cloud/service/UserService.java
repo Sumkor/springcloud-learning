@@ -57,6 +57,7 @@ public class UserService {
      */
     @HystrixCommand(fallbackMethod = "getDefaultUser")
     public CommonResult getUser(Long id) {
+        LOGGER.info("getUser id:{}, thread:{}", id, Thread.currentThread().getName());
         return restTemplate.getForObject(userServiceUrl + "/user/{1}", CommonResult.class, id);
     }
 
@@ -96,7 +97,7 @@ public class UserService {
             groupKey = "getUserGroup",
             threadPoolKey = "PoolAAA")
     public CommonResult getUserCommand(@PathVariable Long id) {
-        LOGGER.info("getUserCommand id:{}", id);
+        LOGGER.info("getUserCommand id:{}, thread:{}", id, Thread.currentThread().getName());
         return restTemplate.getForObject(userServiceUrl + "/user/{1}", CommonResult.class, id);
     }
 

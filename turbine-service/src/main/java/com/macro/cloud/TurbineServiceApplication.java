@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.turbine.EnableTurbine;
 
-@EnableTurbine
+@EnableTurbine // 启用Turbine，用来聚合hystrix-service的监控信息
 @EnableDiscoveryClient
 @SpringBootApplication
 public class TurbineServiceApplication {

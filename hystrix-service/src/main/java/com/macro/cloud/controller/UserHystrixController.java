@@ -3,6 +3,7 @@ package com.macro.cloud.controller;
 import cn.hutool.core.thread.ThreadUtil;
 import com.macro.cloud.domain.CommonResult;
 import com.macro.cloud.domain.User;
+import com.macro.cloud.service.RoleService;
 import com.macro.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,11 @@ import java.util.concurrent.Future;
 @RestController
 @RequestMapping("/user")
 public class UserHystrixController {
+
     @Autowired
     private UserService userService;
+    @Autowired
+    private RoleService roleService;
 
     /**
      * http://localhost:8401/user/testFallback/1
@@ -80,5 +84,22 @@ public class UserHystrixController {
         Future<User> future3 = userService.getUserFuture(3L);
         future3.get();
         return new CommonResult("操作成功", 200);
+    }
+
+    /**
+     * http://localhost:8401/user/testPool/1
+     *
+     * 结论：
+     * 1. HystrixCommand 注解中的 groupKey、threadPoolKey 会指定特定的线程池
+     * 2. HystrixCommand 注解没有指定线程池的情况下，会根据注入的 Service 自动划分线程池
+     */
+    @GetMapping("/testPool/{id}")
+    public CommonResult testPool(@PathVariable Long id) {
+        userService.getUser(id);
+        roleService.getRole(id);
+
+        userService.getUserCommand(id);
+        roleService.getRoleCommand(id);
+        return new CommonResult<>("操作成功", 200);
     }
 }

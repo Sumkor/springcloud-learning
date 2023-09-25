@@ -6,6 +6,8 @@
 
 ## 目录
 
+- [Spring Cloud 学习教程](https://juejin.cn/column/6962024277382004773)
+
 ### 概述
 
 - [Spring Cloud 整体架构概览](https://juejin.cn/post/6844903938748219406)
@@ -39,8 +41,26 @@ springcloud-learning
 └── hystrix-service -- hystrix服务调用测试服务
 ```
 
-- [Hystrix Dashboard：断路器执行监控](https://www.macrozheng.com/cloud/hystrix_dashboard.html)
-- [Spring Cloud OpenFeign：基于Ribbon和Hystrix的声明式服务调用](https://www.macrozheng.com/cloud/feign.html)
+- [Hystrix Dashboard：断路器执行监控](https://juejin.cn/post/6844903951179972622)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── user-service -- 提供User对象CRUD接口的服务
+├── hystrix-service -- hystrix服务调用测试服务
+├── turbine-service -- 聚合收集hystrix实例监控信息的服务
+└── hystrix-dashboard -- 展示hystrix实例监控信息的仪表盘
+```
+
+- [Spring Cloud OpenFeign：基于Ribbon和Hystrix的声明式服务调用](https://juejin.cn/post/6844903959086235655)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── user-service -- 提供User对象CRUD接口的服务
+└── feign-service -- feign服务调用测试服务
+```
+
 - [Spring Cloud Zuul：API网关服务](https://www.macrozheng.com/cloud/zuul.html)
 - [Spring Cloud Config：外部集中化配置管理](https://www.macrozheng.com/cloud/config.html)
 - [Spring Cloud Bus：消息总线](https://www.macrozheng.com/cloud/bus.html)
