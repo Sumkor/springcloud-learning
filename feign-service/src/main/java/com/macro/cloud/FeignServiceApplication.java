@@ -6,7 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
- * Spring Cloud OpenFeign 是声明式的服务调用工具，它整合了Ribbon和Hystrix，拥有负载均衡和服务容错功能
+ * Spring Cloud OpenFeign 是声明式的服务调用工具
+ *
+ * 在 2020.x 版本之前，open feign 默认依赖 hystrix、ribbon。
+ * 从 2020.x 版本开始，open feign 不再依赖 hystrix、ribbon。
  */
 @EnableFeignClients // 启用Feign的客户端功能
 @EnableDiscoveryClient

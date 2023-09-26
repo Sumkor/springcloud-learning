@@ -28,9 +28,14 @@ feign:
 #    # MaxAutoRetriesNextServer: 2 #切换实例的重试次数
 #    # MaxAutoRetries: 1 #对当前实例的重试次数
 
-# Ribbon 全局配置不生效？
+# Ribbon 全局配置
 ribbon:
-  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #修改负载均衡算法
+  # 针对指定服务开启饥饿加载
+  eager-load:
+    enabled: true
+    clients: user-service
+  # 全局修改负载均衡算法无效！！因为 RibbonClientConfiguration.ribbonRule 中默认使用 ZoneAvoidanceRule 覆盖 yml 中的配置！！
+  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 
 logging:
   level:
