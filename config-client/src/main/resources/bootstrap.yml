@@ -5,14 +5,16 @@ spring:
     name: config-client
   cloud:
     config: #Config客户端配置
-      profile: dev #启用配置后缀名称
-      label: dev #分支名称
       uri: http://localhost:8901 #配置中心地址
-      name: config #配置文件名称
+      label: dev #分支名称
+      name: config #配置文件名称、应用名称
+      profile: dev #配置文件后缀、应用环境
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8001/eureka/
+
+# 通过请求 /actuator/refresh 刷新配置
 management:
   endpoints:
     web:

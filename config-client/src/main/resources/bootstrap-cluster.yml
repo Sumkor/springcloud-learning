@@ -8,7 +8,7 @@ spring:
       profile: dev #启用环境名称
       label: dev #分支名称
       name: config #配置文件名称
-      discovery:
+      discovery: #从注册中心获取配置中心地址，不需要指定具体uri
         enabled: true
         service-id: config-server
 eureka:

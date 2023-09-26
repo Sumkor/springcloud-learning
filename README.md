@@ -71,7 +71,16 @@ springcloud-learning
 └── zuul-proxy -- zuul作为网关的测试服务
 ```
 
-- [Spring Cloud Config：外部集中化配置管理](https://www.macrozheng.com/cloud/config.html)
+- [Spring Cloud Config：外部集中化配置管理](https://juejin.cn/post/6844903966405296142)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── config-server -- 配置中心服务
+├── config-security-server -- 带安全认证的配置中心服务
+└── config-client -- 获取配置的客户端服务
+```
+
 - [Spring Cloud Bus：消息总线](https://www.macrozheng.com/cloud/bus.html)
 - [Spring Cloud Sleuth：分布式请求链路跟踪](https://www.macrozheng.com/cloud/sleuth.html)
 - [Spring Cloud Consul：服务治理与配置中心](https://www.macrozheng.com/cloud/consul.html)
