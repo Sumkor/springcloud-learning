@@ -81,8 +81,24 @@ springcloud-learning
 └── config-client -- 获取配置的客户端服务
 ```
 
-- [Spring Cloud Bus：消息总线](https://www.macrozheng.com/cloud/bus.html)
-- [Spring Cloud Sleuth：分布式请求链路跟踪](https://www.macrozheng.com/cloud/sleuth.html)
+- [Spring Cloud Bus：消息总线](https://juejin.cn/post/6844903968158547976)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── config-server -- 配置中心服务
+└── config-client -- 获取配置的客户端服务
+```
+
+- [Spring Cloud Sleuth：分布式请求链路跟踪](https://juejin.cn/post/6844903975016366088)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── user-service -- 提供User对象CRUD接口的服务
+└── ribbon-service -- ribbon服务调用测试服务
+```
+
 - [Spring Cloud Consul：服务治理与配置中心](https://www.macrozheng.com/cloud/consul.html)
 - [Spring Cloud Gateway：新一代API网关服务](https://www.macrozheng.com/cloud/gateway.html)
 

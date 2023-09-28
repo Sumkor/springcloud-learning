@@ -28,6 +28,9 @@ public class UserController {
         return new CommonResult("操作成功", 200);
     }
 
+    /**
+     * http://localhost:8201/user/1
+     */
     @GetMapping("/{id}")
     public CommonResult<User> getUser(@PathVariable Long id) {
         User user = userService.getUser(id);
