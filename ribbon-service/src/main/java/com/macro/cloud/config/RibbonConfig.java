@@ -6,6 +6,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerAutoConfiguration;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerInterceptor;
+import org.springframework.cloud.context.named.NamedContextFactory;
 import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -85,7 +86,77 @@ public class RibbonConfig {
      * @see RibbonLoadBalancerClient#execute(java.lang.String, org.springframework.cloud.client.ServiceInstance, org.springframework.cloud.client.loadbalancer.LoadBalancerRequest)
      */
     @Bean
-    public IRule myRule(){
-        return new RandomRule();
+    public IRule myRule() {
+        RandomRule randomRule = new RandomRule();
+        return randomRule;
     }
+
+    /**
+     * 远程服务第一次访问成功，后续访问失败问题。
+     *
+     * loadBalancer 实例中记录了远程服务列表，会定时更新远程服务列表
+     * @see DynamicServerListLoadBalancer#updateListOfServers()
+     *
+     * 注意！这里使用了 {@link #myRule} 自定义了负载均衡算法，与 zipkin 组件整合的时候，需要注意：
+     * 启动类上必须要加注解 @RibbonClients(defaultConfiguration = RibbonConfig.class)
+     * 否则会出现多个 loadBalancer 实例共享同一个 rule 实例，由于 loadBalancer 实例与 rule 实例是互相引用的，这样就串数据了！
+     * 导致从 rule 实例中获取到错误的 loadBalancer 实例，因此拿不到远程服务列表而访问失败！
+     * @see RandomRule#choose(java.lang.Object)
+     *
+     * loadBalancer 实例与 rule 实例之间互相引用！
+     * @see BaseLoadBalancer#setRule
+     * @see AbstractLoadBalancerRule#setLoadBalancer
+     *
+     */
+
+    /**
+     * 在 Ribbon 中，LoadBalancer 和 Rule 是两个关键的概念，它们分别负责负载均衡和选择负载均衡策略的工作。
+     *
+     *     LoadBalancer（负载均衡器）：
+     *     LoadBalancer负责将来自客户端的请求分发到服务实例上，以实现负载均衡。它通过维护一个可用服务实例的列表，并根据选定的负载均衡策略选择要发送请求的实例。Ribbon提供了默认的LoadBalancer实现，但也可以自定义实现。
+     *
+     *     Rule（规则）：
+     *     Rule定义了负载均衡的策略或规则，用于选择要从LoadBalancer中选择的服务实例。Ribbon提供了一些默认的规则，例如RoundRobinRule（轮询）、RandomRule（随机）等，也可以自定义规则。
+     *
+     * 总结来说，LoadBalancer 负责将请求分发到服务实例，而 Rule 决定了如何选择服务实例。
+     */
+
+    /**
+     * @RibbonClients 实现原理
+     *
+     * `@RibbonClients` 注解是用于在主启动类上配置全局的 Ribbon 客户端的，实现对全局和特定客户端的 Ribbon 配置的统一管理。
+     * `@RibbonClients` 注解的实现原理是通过 Spring 的注解处理器和 BeanDefinitionRegistry 来注册 Ribbon 客户端配置。
+     * 具体来说：
+     *  - 当使用 `@RibbonClients` 注解时，Spring 在启动时会扫描所有的类，并检测到带有 `@RibbonClients` 注解的类。
+     *  - 然后，注解处理器会解析该注解，提取出其中的配置信息。
+     *    - 首先会解析 `defaultConfiguration` 属性，该属性指定了默认的 Ribbon 客户端配置类。
+     *    - 然后，根据 `@RibbonClient` 注解的信息，逐个注册每个客户端的配置类。
+     *  - 注册过程中，会将配置类的信息转化为 BeanDefinition，并将其添加到 BeanDefinitionRegistry 中，以便 Spring 在后续的实例化和依赖注入过程中能够正确地创建和配置 Ribbon 客户端。
+     */
+
+    /**
+     * 重大发现，获取 user-service 实例的时候，会创建子容器！
+     *
+     * 这里入参 name="user-service" type=ILoadBalancer.class
+     * @see NamedContextFactory#getInstance(java.lang.String, java.lang.Class)
+     *
+     * 1. 当主启动类 RibbonServiceApplication 上标记了 @RibbonClients(defaultConfiguration = RibbonConfig.class)
+     *
+     * 创建子容器过程，具有以下几个配置类：
+     *     default.org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration
+     *     default.org.springframework.cloud.netflix.ribbon.eureka.RibbonEurekaAutoConfiguration
+     *     default.com.macro.cloud.RibbonServiceApplication
+     * @see NamedContextFactory#createContext(java.lang.String)
+     *
+     * 此时，LoadBalancer 实例是在子容器中，而在子容器中，通过 default.com.macro.cloud.RibbonServiceApplication 创建了一个 Rule 实例，它们之间互相引用。
+     *
+     * 2. 当主启动类 RibbonServiceApplication 上没有标记 @RibbonClients(defaultConfiguration = RibbonConfig.class)
+     *
+     * 创建子容器过程，具有以下几个配置类：
+     *     default.org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration
+     *     default.org.springframework.cloud.netflix.ribbon.eureka.RibbonEurekaAutoConfiguration
+     * @see NamedContextFactory#createContext(java.lang.String)
+     *
+     * 此时，LoadBalancer 实例是在子容器中，而 Rule 实例是在父容器中，就会导致多个 LoadBalancer 实例绑定同一个 Rule 实例而出错！
+     */
 }
