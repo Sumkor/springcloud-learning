@@ -13,5 +13,6 @@ spring:
         enabled: true #是否启用配置中心功能
         format: yaml #设置配置值的格式
         prefix: config #设置配置所在目录
-        profile-separator: ':' #设置配置的分隔符
-        data-key: data #配置key的名字，由于Consul是K/V存储，配置存储在对应K的V中
+        profile-separator: ':' #设置 profile 的分隔符
+        data-key: data #配置 key 的名字
+        # 这里的配置，能读取到远程配置 key='config/consul-config-client:dev/data' 对应的 value

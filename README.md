@@ -135,7 +135,15 @@ springcloud-learning
 └── ribbon-service -- ribbon服务调用测试服务
 ```
 
-- [Spring Cloud Consul：服务治理与配置中心](https://www.macrozheng.com/cloud/consul.html)
+- [Spring Cloud Consul：服务治理与配置中心](https://juejin.cn/post/6844903976710701063)
+
+``` lua
+springcloud-learning
+├── consul-config-client -- 用于演示consul作为配置中心的consul客户端
+├── consul-user-service -- 注册到consul的提供User对象CRUD接口的服务
+└── consul-service -- 注册到consul的ribbon服务调用测试服务
+```
+
 - [Spring Cloud Gateway：新一代API网关服务](https://www.macrozheng.com/cloud/gateway.html)
 
 ### Spring Cloud Alibaba

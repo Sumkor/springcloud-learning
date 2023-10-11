@@ -19,6 +19,9 @@ public class UserRibbonController {
     @Value("${service-url.consul-user-service}")
     private String userServiceUrl;
 
+    /**
+     * http://localhost:8308/user/1
+     */
     @GetMapping("/{id}")
     public CommonResult getUser(@PathVariable Long id) {
         return restTemplate.getForObject(userServiceUrl + "/user/{1}", CommonResult.class, id);

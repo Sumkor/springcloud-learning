@@ -4,10 +4,10 @@ spring:
   application:
     name: consul-ribbon-service
   cloud:
-    consul:
+    consul: #Consul服务注册发现配置
       host: localhost
       port: 8500
       discovery:
         service-name: ${spring.application.name}
 service-url:
-  consul-user-service: http://consul-user-service
+  consul-user-service: http://consul-user-service #会从注册中心获取实际地址
