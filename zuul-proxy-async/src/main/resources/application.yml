@@ -1,0 +1,25 @@
+server:
+  port: 8802
+spring:
+  application:
+    name: zuul-proxy
+  main:
+    allow-bean-definition-overriding: true
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8001/eureka/
+
+zuul:
+  # 与 eureka 结合使用，给服务配置路由
+  # 访问 http://localhost:8802/userService/user/1  请求路由到 user-service
+  # 访问 http://localhost:8802/feignService/user/1 请求路由到 feign-service
+  routes:
+    user-service:
+      path: /userService/**
+    feign-service:
+      path: /feignService/**
+  sensitive-headers: Cookie,Set-Cookie,Authorization #防止路由时的 Cookie 及 Authorization 丢失
+  add-host-header: true #设置为 true，则重定向时会添加原始的 host 请求头

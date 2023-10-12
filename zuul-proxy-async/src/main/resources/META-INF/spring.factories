@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.sumkor.cloud.config.MyZuulServerAutoConfiguration,\
+com.sumkor.cloud.config.MyZuulProxyAutoConfiguration
