@@ -1,0 +1,23 @@
+server:
+  port: 9201
+spring:
+  redis:
+    host: localhost
+    port: 6379
+  cloud:
+    gateway:
+      # 多次请求地址：http://localhost:9201/user/1 ，会返回状态码为 429 的错误
+      routes:
+        - id: requestratelimiter_route
+          uri: http://localhost:8201
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1 #每秒允许处理的请求数量
+                redis-rate-limiter.burstCapacity: 2 #每秒最大处理的请求数量
+                key-resolver: "#{@ipKeyResolver}" #限流策略，对应策略的Bean
+          predicates:
+            - Method=GET
+logging:
+  level:
+    org.springframework.cloud.gateway: debug

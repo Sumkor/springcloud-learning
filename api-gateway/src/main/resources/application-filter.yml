@@ -1,12 +1,10 @@
 server:
   port: 9201
 spring:
-  redis:
-    host: localhost
-    port: 6379
   cloud:
     gateway:
       routes:
+        # 根据路由请求返回的HTTP状态码来确定是否进行重试
         - id: retry_route
           uri: http://localhost:8201
           predicates:
@@ -21,6 +19,45 @@ spring:
                   maxBackoff: 50ms
                   factor: 2
                   basedOnPreviousValue: false
+
+        # 对GET请求添加username=macro的请求参数
+        # 当请求 http://localhost:9201/user/getByUsername 时会加上参数为 http://localhost:8201/user/getByUsername?username=macro
+        - id: add_request_parameter_route
+          uri: http://localhost:8201
+          predicates:
+            - Method=GET
+          filters:
+            - AddRequestParameter=username, macro
+
+        # 对指定数量的路径前缀进行去除
+        # 当请求 http://localhost:9201/user-service/a/user/1 时会截断为 http://localhost:8201/user/1
+        - id: strip_prefix_route
+          uri: http://localhost:8201
+          predicates:
+            - Path=/user-service/**
+          filters:
+            - StripPrefix=2
+
+        # 对路径前缀进行追加
+        # 当请求 http://localhost:9201/1 时会追加前缀为 http://localhost:8201/user/1
+        - id: prefix_path_route
+          uri: http://localhost:8201
+          predicates:
+            - Method=GET
+          filters:
+            - PrefixPath=/user
+
+        # 当路由出错时会转发到服务降级处理的控制器上
+        - id: hystrix_route
+          uri: http://localhost:8201
+          predicates:
+            - Method=GET
+          filters:
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/fallback
+
 logging:
   level:
     org.springframework.cloud.gateway: debug

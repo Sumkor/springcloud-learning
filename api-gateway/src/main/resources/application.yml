@@ -6,6 +6,7 @@ spring:
   cloud:
     gateway:
       routes:
+        # 请求 http://localhost:9201/user/1 时会路由到 http://localhost:8201/user/1
         - id: path_route #路由的ID
           uri: ${service-url.user-service}/user/{id} #匹配后路由地址
           predicates: # 断言，路径相匹配的进行路由

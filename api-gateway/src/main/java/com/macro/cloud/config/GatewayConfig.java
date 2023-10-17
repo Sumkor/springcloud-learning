@@ -13,6 +13,8 @@ public class GatewayConfig {
 
     @Bean
     public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
+        // 请求时 http://localhost:9201/user/getByUsername?username=macro
+        // 路由到 http://localhost:8201/user/getByUsername?username=macro
         return builder.routes()
                 .route("path_route2", r -> r.path("/user/getByUsername")
                         .uri("http://localhost:8201/user/getByUsername"))

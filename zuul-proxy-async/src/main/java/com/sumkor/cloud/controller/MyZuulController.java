@@ -1,4 +1,4 @@
-package com.sumkor.cloud.config;
+package com.sumkor.cloud.controller;
 
 import com.netflix.zuul.context.RequestContext;
 import org.slf4j.Logger;

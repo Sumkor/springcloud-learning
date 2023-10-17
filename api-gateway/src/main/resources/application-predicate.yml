@@ -10,3 +10,37 @@ spring:
           uri: ${service-url.user-service}
           predicates:
             - RemoteAddr=192.168.6.107/24
+
+        # 在指定时间之后的请求会匹配该路由
+        - id: after_time
+          uri: ${service-url.user-service}
+          predicates:
+            - After=2019-09-24T16:30:00+08:00[Asia/Shanghai]
+
+        # 在指定时间区间内的请求会匹配该路由
+        - id: after_time
+          uri: ${service-url.user-service}
+          predicates:
+            - Between=2019-09-24T16:30:00+08:00[Asia/Shanghai], 2019-09-25T16:30:00+08:00[Asia/Shanghai]
+
+        # 带有指定Cookie的请求会匹配该路由：curl http://localhost:9201/user/1 --cookie "username=macro"
+        - id: cookie_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Cookie=username,macro
+
+        # 带有指定请求头的请求会匹配该路由：curl http://localhost:9201/user/1 -H "X-Request-Id:123"
+        - id: header_route
+          uri: ${service-url.user-service}
+          predicates:
+            - Header=X-Request-Id, \d+
+
+        # 使用权重来路由相应请求，以下表示有80%的请求会被路由到localhost:8201，20%会被路由到localhost:8202
+        - id: weight_high
+          uri: ${service-url.user-service}
+          predicates:
+            - Weight=group1, 8
+        - id: weight_low
+          uri: ${service-url.user-service}
+          predicates:
+            - Weight=group1, 2
