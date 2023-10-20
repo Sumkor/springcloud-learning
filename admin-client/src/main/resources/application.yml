@@ -4,7 +4,7 @@ spring:
 #  boot:
 #    admin:
 #      client:
-#        url: http://localhost:9301
+#        url: http://localhost:9301 #配置admin-server地址，使用注册中心时不需要配置
 server:
   port: 9305
 management:

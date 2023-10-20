@@ -2,7 +2,7 @@
 
 ## 简介
 
-一套涵盖大部分核心组件使用的Spring Cloud教程，包括Spring Cloud Alibaba及分布式事务Seata，基于Spring Cloud Greenwich及SpringBoot 2.1.7。24篇文章，篇篇精华，34个Demo，涵盖大部分应用场景。
+Spring Cloud 教程，基于 Spring Cloud Greenwich 及 SpringBoot 2.1.7。
 
 ## 目录
 
@@ -109,13 +109,23 @@ springcloud-learning
 └── consul-service -- 注册到consul的ribbon服务调用测试服务
 ```
 
-- [Spring Cloud Gateway：新一代API网关服务](https://www.macrozheng.com/cloud/gateway.html)
+- [Spring Cloud Gateway：新一代API网关服务](https://juejin.cn/post/6844903960696848397)
 
 ``` lua
 springcloud-learning
 ├── eureka-server -- eureka注册中心
 ├── user-service -- 提供User对象CRUD接口的服务
 └── api-gateway -- gateway作为网关的测试服务
+```
+
+- [Spring Boot Admin：微服务应用监控](https://juejin.cn/post/6844903984109617165)
+
+``` lua
+springcloud-learning
+├── eureka-server -- eureka注册中心
+├── admin-server -- admin监控中心服务
+├── admin-client -- admin监控中心监控的应用服务
+└── admin-security-server -- 带登录认证的admin监控中心服务
 ```
 
 ### Spring Cloud Alibaba
@@ -129,10 +139,6 @@ springcloud-learning
 - [Spring Cloud Security：Oauth2使用入门](https://www.macrozheng.com/cloud/oauth2.html)
 - [Spring Cloud Security：Oauth2结合JWT使用](https://www.macrozheng.com/cloud/oauth2_jwt.html)
 - [Spring Cloud Security：Oauth2实现单点登录](https://www.macrozheng.com/cloud/oauth2_sso.html)
-
-### 微服务监控
-
-- [Spring Boot Admin：微服务应用监控](https://www.macrozheng.com/cloud/admin.html)
 
 ### 微服务解决方案
 
