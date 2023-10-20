@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
 
 /**
- * pring Cloud Gateway 自带了一个限流实现，就是 RedisRateLimiter，可以用于分布式限流。
+ * Spring Cloud Gateway 自带了一个限流实现，就是 RedisRateLimiter，可以用于分布式限流。
  * 基于令牌桶算法，不依赖于内部线程，而是在每次处理请求之前先实时计算出要填充的令牌数并填充，然后再从桶中获取令牌。
  * 具体逻辑是放在一段 lua 脚本中的：src/main/resources/META-INF/scripts/request_rate_limiter.lua
  *
