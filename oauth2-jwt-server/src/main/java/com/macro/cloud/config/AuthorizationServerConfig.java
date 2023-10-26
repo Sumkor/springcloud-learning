@@ -72,13 +72,13 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .refreshTokenValiditySeconds(864000)
 //                .redirectUris("http://www.baidu.com")
                 .redirectUris("http://localhost:9501/login") //单点登录时配置
-                .autoApprove(true) //自动授权配置
+//                .autoApprove(true) //自动授权配置
                 .scopes("all")
-                .authorizedGrantTypes("authorization_code","password","refresh_token");
+                .authorizedGrantTypes("authorization_code", "password", "refresh_token"); //授权模式增加refresh_token
     }
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
-        security.tokenKeyAccess("isAuthenticated()"); // 获取密钥需要身份认证，使用单点登录时必须配置
+        security.tokenKeyAccess("isAuthenticated()"); //获取密钥需要身份认证，使用单点登录时必须配置
     }
 }

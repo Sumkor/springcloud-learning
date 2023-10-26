@@ -128,17 +128,37 @@ springcloud-learning
 └── admin-security-server -- 带登录认证的admin监控中心服务
 ```
 
+### Spring Cloud Oauth2
+
+- [OAuth 2.0 的四种方式](https://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html)
+
+- [Spring Cloud Security：Oauth2使用入门](https://juejin.cn/post/6844903987137740813)
+
+``` lua
+springcloud-learning
+└── oauth2-server -- oauth2认证测试服务
+```
+
+- [Spring Cloud Security：Oauth2结合JWT使用](https://juejin.cn/post/6844903988727382024)
+
+``` lua
+springcloud-learning
+└── oauth2-jwt-server -- 使用jwt的oauth2认证测试服务
+```
+
+- [Spring Cloud Security：Oauth2实现单点登录](https://juejin.cn/post/6844903992204623879)
+
+``` lua
+springcloud-learning
+├── oauth2-jwt-server -- 使用jwt的oauth2认证测试服务
+└── oauth2-client -- 单点登录的oauth2客户端服务
+```
+
 ### Spring Cloud Alibaba
 
 - [Spring Cloud Alibaba：Nacos 作为注册中心和配置中心使用](https://www.macrozheng.com/cloud/nacos.html)
 - [Spring Cloud Alibaba：Sentinel实现熔断与限流](https://www.macrozheng.com/cloud/sentinel.html)
 - [使用Seata彻底解决Spring Cloud中的分布式事务问题](https://www.macrozheng.com/cloud/seata.html)
-
-### Spring Cloud Oauth2
-
-- [Spring Cloud Security：Oauth2使用入门](https://www.macrozheng.com/cloud/oauth2.html)
-- [Spring Cloud Security：Oauth2结合JWT使用](https://www.macrozheng.com/cloud/oauth2_jwt.html)
-- [Spring Cloud Security：Oauth2实现单点登录](https://www.macrozheng.com/cloud/oauth2_sso.html)
 
 ### 微服务解决方案
 

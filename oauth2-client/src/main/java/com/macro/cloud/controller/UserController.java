@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    /**
+     * http://localhost:9501/user/getCurrentUser
+     */
     @GetMapping("/getCurrentUser")
     public Object getCurrentUser(Authentication authentication) {
         return authentication;

@@ -10,7 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- * SpringSecurity配置
+ * SpringSecurity配置，允许认证相关路径的访问及表单登录
  * Created by macro on 2019/10/8.
  */
 @Configuration
