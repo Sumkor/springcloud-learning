@@ -12,6 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope
 public class ConfigClientController {
 
+    /**
+     * http://localhost:9101/configInfo
+     *
+     * ${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+     *
+     * 应用名称为 nacos-config-client 的应用在 dev 环境下的 yaml 配置，dataid 为 nacos-config-client-dev.yaml，配置内容为：
+     * config:
+     *   info: "config info for dev"
+     */
     @Value("${config.info}")
     private String configInfo;
 

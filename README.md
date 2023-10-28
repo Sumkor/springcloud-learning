@@ -156,9 +156,31 @@ springcloud-learning
 
 ### Spring Cloud Alibaba
 
-- [Spring Cloud Alibaba：Nacos 作为注册中心和配置中心使用](https://www.macrozheng.com/cloud/nacos.html)
-- [Spring Cloud Alibaba：Sentinel实现熔断与限流](https://www.macrozheng.com/cloud/sentinel.html)
-- [使用Seata彻底解决Spring Cloud中的分布式事务问题](https://www.macrozheng.com/cloud/seata.html)
+- [Spring Cloud Alibaba：Nacos 作为注册中心和配置中心使用](https://juejin.cn/post/6844903993873793032)
+
+``` lua
+springcloud-learning
+├── nacos-user-service -- 注册到nacos的提供User对象CRUD接口的服务
+├── nacos-ribbon-service -- 注册到nacos的ribbon服务调用测试服务
+└── nacos-config-client -- 用于演示nacos作为配置中心的nacos客户端
+```
+
+- [Spring Cloud Alibaba：Sentinel实现熔断与限流](https://juejin.cn/post/6844903999876022279)
+
+``` lua
+springcloud-learning
+├── sentinel-service -- sentinel功能测试服务
+└── nacos-user-service -- 注册到nacos的提供User对象CRUD接口的服务
+```
+
+- [使用Seata彻底解决Spring Cloud中的分布式事务问题](https://juejin.cn/post/6844904001528397831)
+
+``` lua
+springcloud-learning
+├── seata-order-service -- 整合了seata的订单服务
+├── seata-storage-service -- 整合了seata的库存服务
+└── seata-account-service -- 整合了seata的账户服务
+```
 
 ### 微服务解决方案
 
