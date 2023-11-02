@@ -2,7 +2,7 @@
 
 ## 简介
 
-Spring Cloud 教程，基于 Spring Cloud Greenwich 及 SpringBoot 2.1.7。
+Spring Cloud 教程，版本为 SpringBoot 2.1.7、Spring Cloud Greenwich、Spring Cloud Alibaba 2.1.0.RELEASE
 
 ## 目录
 

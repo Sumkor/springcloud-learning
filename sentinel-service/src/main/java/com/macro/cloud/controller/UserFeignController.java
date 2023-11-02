@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * Sentinel 适配了 Feign 组件，可以用于熔断。
+ *
  * Created by macro on 2019/8/29.
  */
 @RestController
