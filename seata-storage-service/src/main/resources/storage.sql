@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS `seata-storage` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE `seata-storage`;
+
 CREATE TABLE `storage` (
                          `id` bigint(11) NOT NULL AUTO_INCREMENT,
                          `product_id` bigint(11) DEFAULT NULL COMMENT '产品id',
@@ -7,4 +11,25 @@ CREATE TABLE `storage` (
                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO `seat-storage`.`storage` (`id`, `product_id`, `total`, `used`, `residue`) VALUES ('1', '1', '100', '0', '100');
+INSERT INTO `seata-storage`.`storage` (`id`, `product_id`, `total`, `used`, `residue`) VALUES ('1', '1', '100', '0', '100');
+
+-- the table to store seata xid data
+-- 0.7.0+ add context
+-- you must to init this sql for you business databese. the seata server not need it.
+-- 此脚本必须初始化在你当前的业务数据库中，用于AT模式XID记录。与server端无关（注：业务数据库）
+-- 注意此处0.3.0+ 增加唯一索引 ux_undo_log
+drop table if exists `undo_log`;
+CREATE TABLE `undo_log`
+(
+    `id`            bigint(20) NOT NULL AUTO_INCREMENT,
+    `branch_id`     bigint(20) NOT NULL,
+    `xid`           varchar(100) NOT NULL,
+    `context`       varchar(128) NOT NULL,
+    `rollback_info` longblob     NOT NULL,
+    `log_status`    int(11) NOT NULL,
+    `log_created`   datetime     NOT NULL,
+    `log_modified`  datetime     NOT NULL,
+    `ext`           varchar(100) DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

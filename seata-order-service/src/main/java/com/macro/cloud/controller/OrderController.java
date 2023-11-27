@@ -17,6 +17,8 @@ public class OrderController {
 
     /**
      * 创建订单
+     *
+     * http://localhost:8180/order/create?userId=1&productId=1&count=10&money=100
      */
     @GetMapping("/create")
     public CommonResult create(Order order) {
