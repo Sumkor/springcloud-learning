@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderDao {
 
+    Order query(@Param("userId") Long userId);
+
     /**
      * 创建订单
      */

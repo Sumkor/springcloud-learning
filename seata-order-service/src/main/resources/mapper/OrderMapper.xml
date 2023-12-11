@@ -9,6 +9,12 @@
         <result column="money" property="money" jdbcType="DECIMAL"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
     </resultMap>
+
+    <select id="query" resultMap="BaseResultMap">
+        SELECT * FROM `order`
+        WHERE user_id = #{userId}
+    </select>
+
     <insert id="create">
         INSERT INTO `order` (`id`, `user_id`, `product_id`, `count`, `money`, `status`)
         VALUES (NULL, #{userId}, #{productId}, #{count}, #{money}, 0);
