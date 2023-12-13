@@ -1,10 +1,10 @@
 package com.macro.cloud.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.macro.cloud.constant.AuthConstant;
 import com.macro.cloud.authorization.AuthorizationManager;
 import com.macro.cloud.component.RestAuthenticationEntryPoint;
 import com.macro.cloud.component.RestfulAccessDeniedHandler;
+import com.macro.cloud.constant.AuthConstant;
 import com.macro.cloud.filter.IgnoreUrlsRemoveJwtFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -44,7 +44,7 @@ public class ResourceServerConfig {
         //对白名单路径，直接移除JWT请求头
         http.addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION);
         http.authorizeExchange()
-                .pathMatchers(ArrayUtil.toArray(ignoreUrlsConfig.getUrls(),String.class)).permitAll()//白名单配置
+                .pathMatchers(ArrayUtil.toArray(ignoreUrlsConfig.getUrls(), String.class)).permitAll()//白名单配置，不会进入鉴权管理器校验
                 .anyExchange().access(authorizationManager)//鉴权管理器配置
                 .and().exceptionHandling()
                 .accessDeniedHandler(restfulAccessDeniedHandler)//处理未授权
@@ -53,6 +53,14 @@ public class ResourceServerConfig {
         return http.build();
     }
 
+    /**
+     * 将 JWT 对象转换成 AbstractAuthenticationToken 扩展类型
+     *
+     * 首先从 JWT 中解析出角色权限信息 GrantedAuthority
+     * @see JwtGrantedAuthoritiesConverter#convert(org.springframework.security.oauth2.jwt.Jwt)
+     * 接着构造 JwtAuthenticationToken 对象
+     * @see JwtAuthenticationConverter#convert(org.springframework.security.oauth2.jwt.Jwt)
+     */
     @Bean
     public Converter<Jwt, ? extends Mono<? extends AbstractAuthenticationToken>> jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();

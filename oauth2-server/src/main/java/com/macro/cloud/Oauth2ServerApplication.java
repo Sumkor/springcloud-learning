@@ -77,7 +77,7 @@ public class Oauth2ServerApplication {
      * 之后会浏览器会带着授权码跳转到我们指定的路径
      * GET https://www.baidu.com/?code=eTsADY&state=normal
      *
-     * 使用授权码请求访问令牌
+     * 使用授权码请求访问令牌（使用 client_id 和 client_secret 构造一个 Authorization 头信息）
      * POST http://localhost:9401/oauth/token
      * @see TokenEndpoint#postAccessToken(java.security.Principal, java.util.Map)
      *

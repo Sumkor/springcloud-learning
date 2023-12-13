@@ -154,6 +154,15 @@ springcloud-learning
 └── oauth2-client -- 单点登录的oauth2客户端服务
 ```
 
+- [Spring Cloud Gateway + Oauth2 实现统一认证和鉴权](https://juejin.cn/post/6850037263707930631)
+
+``` lua
+springcloud-learning
+├── micro-oauth2-auth -- 网关服务，负责请求转发和鉴权功能，整合Spring Security、Oauth2
+├── micro-oauth2-gateway -- Oauth2认证服务，负责对登录用户进行认证，整合Spring Security、Oauth2
+└── micro-oauth2-api -- 受保护的API服务，用户鉴权通过后可以访问该服务，不整合Spring Security、Oauth2
+```
+
 ### Spring Cloud Alibaba
 
 - [Spring Cloud Alibaba：Nacos 作为注册中心和配置中心使用](https://juejin.cn/post/6844903993873793032)
@@ -184,7 +193,6 @@ springcloud-learning
 
 ### 微服务解决方案
 
-- [微服务权限终极解决方案，Spring Cloud Gateway + Oauth2 实现统一认证和鉴权！](https://www.macrozheng.com/cloud/gateway_oauth2.html)
 - [微服务聚合Swagger文档，这波操作是真的香！](https://www.macrozheng.com/cloud/knife4j_cloud.html)
 - [我扒了半天源码，终于找到了Oauth2自定义处理结果的最佳方案！](https://www.macrozheng.com/cloud/oauth2_custom.html)
 - [开箱即用！看看人家的微服务权限解决方案，那叫一个优雅！](https://www.macrozheng.com/cloud/sa_token_cloud_start.html)

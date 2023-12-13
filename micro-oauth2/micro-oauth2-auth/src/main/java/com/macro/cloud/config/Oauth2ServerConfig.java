@@ -45,8 +45,15 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .authorizedGrantTypes("password", "refresh_token")
                 .accessTokenValiditySeconds(3600)
                 .refreshTokenValiditySeconds(86400);
+
+        // 替换为数据库配置，需要按照 Spring Oauth2 的字段要求建立一张 oauth_client_details 表
+        // 见 org.springframework.security.oauth2.provider.client.JdbcClientDetailsService
+        // clients.withClientDetails(new JdbcClientDetailsService(new SimpleDataSource("url", "user", "pass")));
     }
 
+    /**
+     * 主要配置加载用户信息的服务 UserServiceImpl，以及 RSA 的钥匙对 KeyPair
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
@@ -56,7 +63,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         enhancerChain.setTokenEnhancers(delegates); //配置JWT的内容增强器
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userDetailsService) //配置加载用户信息的服务
-                .accessTokenConverter(accessTokenConverter())
+                .accessTokenConverter(accessTokenConverter()) //配置秘钥对
                 .tokenEnhancer(enhancerChain);
     }
 
@@ -70,11 +77,15 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setKeyPair(keyPair());
         return jwtAccessTokenConverter;
+        /**
+         * 对比 oauth2-jwt-server 项目的配置，这里使用的是密钥对
+         * @see com.macro.cloud.config.JwtTokenStoreConfig#jwtAccessTokenConverter()
+         */
     }
 
     @Bean
     public KeyPair keyPair() {
-        //从classpath下的证书中获取秘钥对
+        //从classpath下的证书中获取秘钥对（包含公钥、私钥）
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
         return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
     }

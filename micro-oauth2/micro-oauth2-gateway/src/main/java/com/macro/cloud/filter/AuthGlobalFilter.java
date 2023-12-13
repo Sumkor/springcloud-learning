@@ -29,6 +29,10 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
+        //请求token时必须带Authorization头，但是没有用户信息！
+        if (exchange.getRequest().getURI().getPath().contains("/auth/oauth/token")) {
+            return chain.filter(exchange);
+        }
         try {
             //从token中解析用户信息并设置到Header中去
             String realToken = token.replace("Bearer ", "");

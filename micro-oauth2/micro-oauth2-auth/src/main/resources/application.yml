@@ -11,11 +11,11 @@ spring:
         server-addr: localhost:8848
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
-  redis:
-    database: 0
-    port: 6379
-    host: localhost
-    password:
+#  redis:
+#    database: 0
+#    port: 6379
+#    host: localhost
+#    password:
 management:
   endpoints:
     web:
