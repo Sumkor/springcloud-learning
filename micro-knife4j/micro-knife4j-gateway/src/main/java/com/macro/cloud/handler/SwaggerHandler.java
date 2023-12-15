@@ -49,7 +49,9 @@ public class SwaggerHandler {
     }
 
     /**
-     * Swagger资源配置，微服务中这各个服务的api-docs信息
+     * Swagger资源配置，可用于获取所有微服务的 api-docs 访问路径
+     *
+     * http://localhost:9201/swagger-resources
      */
     @GetMapping("/swagger-resources")
     public Mono<ResponseEntity> swaggerResources() {

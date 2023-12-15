@@ -47,6 +47,10 @@ public class UserServiceImpl{
         return findUserList.get(0);
     }
 
+    /**
+     * 用户登录
+     * 注意，Sa-Token 的 Session 并不是我们平时理解的 HttpSession，而是利用 Redis 实现的分布式 Session 机制
+     */
     public SaTokenInfo login(String username, String password) {
         SaTokenInfo saTokenInfo = null;
         UserDTO userDTO = loadUserByUsername(username);

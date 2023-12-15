@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
+ * 使用 OpenFeign 来进行声明式服务调用
+ *
  * Created by macro on 2019/8/29.
  */
 @RestController

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 /**
+ * 使用 RestTemplate 来进行远程调用
+ *
  * Created by macro on 2019/8/29.
  */
 @RestController

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController{
 
+    /**
+     * 由于使用了 Redis 实现分布式 Session，直接从 Session 中获取用户信息即可
+     */
     @GetMapping("/info")
     public CommonResult<UserDTO> userInfo() {
         UserDTO userDTO = (UserDTO) StpUtil.getSession().get("userInfo");

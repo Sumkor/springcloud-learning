@@ -9,6 +9,11 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+  redis:
+    database: 0
+    port: 6379
+    host: localhost
+    password:
 
 # Sa-Token配置
 sa-token:

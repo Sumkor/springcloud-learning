@@ -128,39 +128,12 @@ springcloud-learning
 └── admin-security-server -- 带登录认证的admin监控中心服务
 ```
 
-### Spring Cloud Oauth2
-
-- [OAuth 2.0 的四种方式](https://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html)
-
-- [Spring Cloud Security：Oauth2使用入门](https://juejin.cn/post/6844903987137740813)
+- [Spring Cloud LoadBalancer：替代 Ribbon 负载均衡](https://juejin.cn/post/6844903984109617165)
 
 ``` lua
 springcloud-learning
-└── oauth2-server -- oauth2认证测试服务
-```
-
-- [Spring Cloud Security：Oauth2结合JWT使用](https://juejin.cn/post/6844903988727382024)
-
-``` lua
-springcloud-learning
-└── oauth2-jwt-server -- 使用jwt的oauth2认证测试服务
-```
-
-- [Spring Cloud Security：Oauth2实现单点登录](https://juejin.cn/post/6844903992204623879)
-
-``` lua
-springcloud-learning
-├── oauth2-jwt-server -- 使用jwt的oauth2认证测试服务
-└── oauth2-client -- 单点登录的oauth2客户端服务
-```
-
-- [Spring Cloud Gateway + Oauth2 实现统一认证和鉴权](https://juejin.cn/post/6850037263707930631)
-
-``` lua
-springcloud-learning
-├── micro-oauth2-auth -- 网关服务，负责请求转发和鉴权功能，整合Spring Security、Oauth2
-├── micro-oauth2-gateway -- Oauth2认证服务，负责对登录用户进行认证，整合Spring Security、Oauth2
-└── micro-oauth2-api -- 受保护的API服务，用户鉴权通过后可以访问该服务，不整合Spring Security、Oauth2
+├── nacos-loadbalancer-service -- 注册到nacos的loadbalancer服务调用测试服务
+└── nacos-user-service -- 注册到nacos的提供User对象CRUD接口的服务
 ```
 
 ### Spring Cloud Alibaba
@@ -174,7 +147,7 @@ springcloud-learning
 └── nacos-config-client -- 用于演示nacos作为配置中心的nacos客户端
 ```
 
-- [Spring Cloud Alibaba：Sentinel实现熔断与限流](https://juejin.cn/post/6844903999876022279)
+- [Spring Cloud Alibaba：Sentinel 实现熔断与限流](https://juejin.cn/post/6844903999876022279)
 
 ``` lua
 springcloud-learning
@@ -182,7 +155,7 @@ springcloud-learning
 └── nacos-user-service -- 注册到nacos的提供User对象CRUD接口的服务
 ```
 
-- [使用Seata彻底解决Spring Cloud中的分布式事务问题](https://juejin.cn/post/6844904001528397831)
+- [Spring Cloud Alibaba：Seata 解决分布式事务问题](https://juejin.cn/post/6844904001528397831)
 
 ``` lua
 springcloud-learning
@@ -191,11 +164,61 @@ springcloud-learning
 └── seata-account-service -- 整合了seata的账户服务
 ```
 
+### Spring Cloud Oauth2
+
+- [OAuth 2.0 的四种方式](https://www.ruanyifeng.com/blog/2019/04/oauth-grant-types.html)
+- [Spring Cloud Security：Oauth2 使用入门](https://juejin.cn/post/6844903987137740813)
+
+``` lua
+springcloud-learning
+└── oauth2-server -- oauth2认证测试服务
+```
+
+- [Spring Cloud Security：Oauth2 + JWT 使用](https://juejin.cn/post/6844903988727382024)
+
+``` lua
+springcloud-learning
+└── oauth2-jwt-server -- 使用jwt的oauth2认证测试服务
+```
+
+- [Spring Cloud Security：Oauth2 实现单点登录](https://juejin.cn/post/6844903992204623879)
+
+``` lua
+springcloud-learning
+├── oauth2-jwt-server -- 使用jwt的oauth2认证测试服务
+└── oauth2-client -- 单点登录的oauth2客户端服务
+```
+
 ### 微服务解决方案
 
-- [微服务聚合Swagger文档，这波操作是真的香！](https://www.macrozheng.com/cloud/knife4j_cloud.html)
-- [我扒了半天源码，终于找到了Oauth2自定义处理结果的最佳方案！](https://www.macrozheng.com/cloud/oauth2_custom.html)
-- [开箱即用！看看人家的微服务权限解决方案，那叫一个优雅！](https://www.macrozheng.com/cloud/sa_token_cloud_start.html)
-- [再见Feign！推荐一款微服务间调用神器，跟SpringCloud绝配！](https://www.macrozheng.com/cloud/retrofit_cloud.html)
+- [Spring Cloud Gateway + Oauth2 实现统一认证和鉴权](https://juejin.cn/post/6850037263707930631)
+- [Spring Cloud Gateway + Oauth2 自定义处理结果](https://juejin.cn/post/6857296054392471559)
+- [Spring Cloud Gateway + Oauth2 依赖版本升级](https://juejin.cn/post/7121892567130013732)
 
+``` lua
+springcloud-learning
+├── micro-oauth2-gateway -- 网关服务，负责请求转发和鉴权功能，整合Spring Security、Oauth2
+├── micro-oauth2-auth -- Oauth2认证服务，负责对登录用户进行认证，整合Spring Security、Oauth2
+└── micro-oauth2-api -- 受保护的API服务，用户鉴权通过后可以访问该服务，不整合Spring Security、Oauth2
+```
+
+- [Sa-Token 权限认证](https://sa-token.cc/doc.html#/use/jur-auth)
+- [Spring Cloud Gateway + Sa-Token 微服务权限解决方案](https://juejin.cn/post/7003141949259513887)
+
+``` lua
+springcloud-learning
+├── micro-sa-token-gateway：网关服务，负责请求转发、登录认证和权限认证
+├── micro-sa-token-auth：认证服务，仅包含一个登录接口，调用Sa-Token的API实现
+├── micro-sa-token-api：受保护的API服务，用户通过网关鉴权通过后可以访问该服务
+└── micro-sa-token-common：通用工具包，抽取其他服务公用的类
+```
+
+- [knife4j 聚合微服务 Swagger 文档](https://juejin.cn/post/6854573219916201997)
+
+``` lua
+springcloud-learning
+├── micro-knife4j-gateway：网关服务，作为微服务API文档的访问入口，聚合所有API文档，需要引入文档前端UI包
+├── micro-knife4j-user：用户服务，普通API服务，不需要引入文档前端UI包
+└── micro-knife4j-order：订单服务，普通API服务，不需要引入文档前端UI包
+```
 

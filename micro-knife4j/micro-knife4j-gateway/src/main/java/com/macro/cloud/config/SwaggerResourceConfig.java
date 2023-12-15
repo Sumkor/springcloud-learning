@@ -26,6 +26,12 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
     private final RouteLocator routeLocator;
     private final GatewayProperties gatewayProperties;
 
+    /**
+     * 聚合其他微服务中 Swagger 的 api-docs 访问路径
+     *
+     * Swagger 的 api-docs 访问路径会返回 JSON 格式数据
+     * 比如用户服务的地址 http://localhost:9201/user-service/v2/api-docs
+     */
     @Override
     public List<SwaggerResource> get() {
         List<SwaggerResource> resources = new ArrayList<>();

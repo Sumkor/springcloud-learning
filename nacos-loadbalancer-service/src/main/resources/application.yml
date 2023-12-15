@@ -8,6 +8,7 @@ spring:
       discovery:
         server-addr: localhost:8848
     loadbalancer:
+      # LoadBalancer为了提高性能，不会在每次请求时去获取实例列表，而是将服务实例列表进行了本地缓存。
       cache: # 负载均衡缓存配置
         enabled: true # 开启缓存
         ttl: 5s # 设置缓存时间
